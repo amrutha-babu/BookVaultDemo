@@ -1,0 +1,39 @@
+﻿@model List<Category>// @model define a datamodel is passing from controller. ie, An object of Ctegory model in passed from controller to the view to display.
+
+<div class="container">
+	<div class="row pt-4">
+		<div class="col-6">
+			<H1>Category List</H1>
+		</div>
+		<div class="col-6 text-end">
+			<a asp-controlller="Category" asp-action="Create" class="btn btn-primary"><i class="bi bi-clipboard-plus-fill pr-5"></i>Create New Category</a>
+		</div>
+	</div>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Category Name </th>
+				<th>Display Order</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var Obj in Model.OrderBy(u => u.DisplayOrder))
+			{
+				<tr>
+					<td>@Obj.Name</td>
+					<td>@Obj.DisplayOrder</td>
+					<td>
+						<div class="w-75 btn-group" role="group">
+							<a asp-controlller="Category" asp-action="Edit" asp-route-id="@Obj.Id" class="btn btn-primary mx-2">
+								<i class="bi bi-pencil-square"></i> Edit
+							</a>
+							<a asp-controlller="Category" asp-action="Delete" asp-route-id="@Obj.Id" class="btn btn-danger mx-2">
+								<i class="bi bi-trash-fill"></i> Delete
+							</a>
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
